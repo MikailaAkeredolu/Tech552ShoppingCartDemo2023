@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="row">
+    <br>
+    <br>
+    <table class="table" >
+      <thead class="thead-dark">
+        <tr style="font-family: 'Alfa Slab One', cursive;">
+          <th scope="col">Image</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <!-- <th scope="col">Rating</th> -->
+          <th scope="col"></th>
+          <th scope="col">Message</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let i of inventory"
+          [class.featured]="i.featured"
+          [class.recyclable]="i.recyclable"
+        >
+          <td><img [src]="i.image"/></td>
+          <td>{{ i.name }}</td>
+          <td>{{ i.price | currency }}</td>
+          <!-- <td style="font-size: 25px;">{{i.rating}}</td> -->
+          <td>
+            <button
+              type="button"
+              (click)="decreaseQty(i)"
+              class="btn btn-danger"
+            >
+              -
+            </button>
+
+            <input
+            
+              type="number"
+              [(ngModel)]="i.qty"
+              min="0"
+              oninput="validity.valid||(value='');"
+              style="margin: 15px; max-width: 40px; text-align: center"
+            />
+
+            <button type="button" (click)="increaseQty(i)" class="btn btn-success">
+              +
+            </button>
+          </td>
+          <td *ngIf="i.qty > 0">
+            <b style="color: #2e7d32">Enjoy our {{ i.name }}</b>
+          </td>
+          <td *ngIf="i.qty === 0">
+            <b style="color: red">No {{ i.name }} today? </b>
+          </td>
+          <td *ngIf="i.qty > i.inStock" style="padding-top: 30px; color: black">
+            We've got only {{ stockCount(i) }} {{ i.name }} left in stock.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- <div>
+      <h3 style="text-align: center">
+        <b>Your total today is : {{ totalPrice() | currency }}</b>
+        <br />
+        <br />
+
+      </h3>
+    </div> -->
+
+<br>
+<br>
+<br>
+<hr>
+    <div class="row">
+      <div class="card-deck">
+        <div class="col-sm-3" card style="color: black; text-align: center;">
+          <div class="card-body">
+            <h5 class="card-title" style="color: #2e7d32;">Today's Special</h5>
+            {{randomMessage()}}
+          </div>
+        </div>
+
+      <!-- <div class="col-sm">col-sm</div> -->
+      <div *ngIf="qtyCount() === 1" class="col-sm-3" card style="color: black; text-align: center;">
+        <div class="card-body">
+          <h5 class="card-title" style="color: #2e7d32;">Cart Qty</h5>
+          You have {{ qtyCount() }} item in your cart
+        </div>
+      </div>
+
+    <div *ngIf="qtyCount() !== 1" class="col-sm-3" card style="color: black; text-align: center;" >
+      <div class="card-body">
+        <h5 class="card-title" style="color: #2e7d32;">Cart Qty</h5>
+        You have {{ qtyCount() }} items in your cart
+      </div>
+    </div>
+
+    <!-- <div class="col-sm">col-sm</div> -->
+        <div class="col-sm-3" card style="color: black; text-align: center;">
+          <div class="card-body">
+            <h5 class="card-title" style="color: red">Subtotal</h5>
+            Your subtotal is : {{ totalPrice() | currency }}
+          </div>
+        </div>
+
+
+        <div class="col-sm-3" card style="color: black; text-align: center;">
+          <div class="card-body">
+            <h5 class="card-title" style="color: #2e7d32;">Total after 10% tax</h5>
+            Your total after Tax is : {{ calculateTotalAfterTax() | currency }}
+          </div>
+        </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+</div>
+<br>
+
+
+
+
+<br><br>
+<br><br>
+
+<div style="margin: auto; text-align: center"><a href="https://www.tech552.com" class="card-link"><small>Powered by Tech552 LLC </small></a></div>
+

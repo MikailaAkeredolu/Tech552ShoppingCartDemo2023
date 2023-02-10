@@ -1,0 +1,29 @@
+
+.featured {
+  /* background-color: rgb(114, 227, 142); */
+   font-weight: bold;
+
+}
+li{
+   list-style-type: none;
+   border: dashed green;
+}
+
+img{
+   max-width: 75px;
+}
+
+.table{
+width: 70%;
+margin: auto;
+}
+
+
+.recyclable{
+/* border: solid 2px black; */
+border: dotted 5px #ddd;
+}
+
+.card{
+  border: 3px dotted #ddd;
+}
